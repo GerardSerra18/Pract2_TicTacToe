@@ -74,6 +74,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    //Para ir actualizando el tablero con la ficha de cada jugador correspondiente
+    const updateBoard =  (index) => {
+        board[index] = currentPlayer;
+    }
 
     
+
 });
