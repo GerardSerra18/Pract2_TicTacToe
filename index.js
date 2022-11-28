@@ -50,5 +50,35 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     resetButton.addEventListener('click', resetBoard); //Accion que realiza el reset del tablero
 
+    //Accion de cada jugador 
+     const userAction = (tile, index) => {
+        if(isValidAction(tile) && isGameActive) {
+            tile.innerText = currentPlayer;
+            tile.classList.add(`player${currentPlayer}`);
+            updateBoard(index);
+            handleResultValidation();
+            changePlayer();
+        }
+    }
+
+    tiles.forEach( (tile, index) => {
+        tile.addEventListener('click', () => userAction(tile, index));
+    }); //Marcador de cada ficha de cada jugador al hacer el click
+
+    //cambiar cada jugador al realizar un click
+    const changePlayer = () => {
+        playerDisplay.classList.remove(`player${currentPlayer}`);
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        playerDisplay.innerText = currentPlayer;
+        playerDisplay.classList.add(`player${currentPlayer}`);
+    }
+
+
+    //Para ir actualizando el tablero con la ficha de cada jugador correspondiente
+    const updateBoard =  (index) => {
+        board[index] = currentPlayer;
+    }
+
     
+
 });
