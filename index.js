@@ -50,5 +50,17 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     resetButton.addEventListener('click', resetBoard); //Accion que realiza el reset del tablero
 
+    //Accion de cada jugador 
+     const userAction = (tile, index) => {
+        if(isValidAction(tile) && isGameActive) {
+            tile.innerText = currentPlayer;
+            tile.classList.add(`player${currentPlayer}`);
+            updateBoard(index);
+            handleResultValidation();
+            changePlayer();
+        }
+    }
+
+
     
 });
