@@ -79,6 +79,55 @@ window.addEventListener('DOMContentLoaded', () => {
         board[index] = currentPlayer;
     }
 
+    //Funcion para poder validar cada jugada para poder comprobar si ya existe la possible combinacion ganadora
+    function handleResultValidation() {
+        let roundWon = false;
+        for (let i = 0; i <= 7; i++) {
+            const winCondition = winningConditions[i];
+            const a = board[winCondition[0]];
+            const b = board[winCondition[1]];
+            const c = board[winCondition[2]];
+            if (a === '' || b === '' || c === '') {
+                continue;
+            }
+            if (a === b && b === c) {
+                roundWon = true;
+                break;
+            }
+        }
+
+    if (roundWon) {
+            announce(currentPlayer === 'X' ? PLAYERX_WON : PLAYERO_WON);
+            isGameActive = false;
+            return;
+        }
+
+    if (!board.includes(''))
+        announce(TIE);
+    }
+
+    const announce = (type) => {
+        switch(type){
+            case PLAYERO_WON:
+                announcer.innerHTML = 'Player <span class="playerO">O</span> Won'; //Texto sobre jugador O ganador
+                break;
+            case PLAYERX_WON:
+                announcer.innerHTML = 'Player <span class="playerX">X</span> Won'; //Texto sobre jugador X ganador
+                break;
+            case TIE:
+                announcer.innerText = 'Tie'; //Texto de cuando existe empate en la partida
+        }
+        announcer.classList.remove('hide'); //Esto nos sirve para esconder el texto que hemos utilizado para anunciar lo que ha sucedido cuando reseteamos la board
+    };
+
+    const isValidAction = (tile) => {
+        if (tile.innerText === 'X' || tile.innerText === 'O'){
+            return false;
+        }
+
+        return true;
+    };
+
     
 
 });
