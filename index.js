@@ -61,6 +61,19 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    tiles.forEach( (tile, index) => {
+        tile.addEventListener('click', () => userAction(tile, index));
+    }); //Marcador de cada ficha de cada jugador al hacer el click
+
+    //cambiar cada jugador al realizar un click
+    const changePlayer = () => {
+        playerDisplay.classList.remove(`player${currentPlayer}`);
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        playerDisplay.innerText = currentPlayer;
+        playerDisplay.classList.add(`player${currentPlayer}`);
+    }
+
+
 
     
 });
